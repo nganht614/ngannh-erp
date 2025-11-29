@@ -1,0 +1,33 @@
+<odoo>
+    <record id ='list_actor_award_form' model= 'ir.ui.view'>
+        <field name='name'>list.actor.award.form</field>
+        <field name='model'>list.actor.award</field>
+        <field name='arch' type='xml'> 
+            <form string ='Awards'>
+                <sheet>
+                    <group>
+                        <field name ='name' />
+                        <field name ='year' />
+                        <field name ='actor_id' />
+                        <field name ='description' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id='list_actor_award_list' model='ir.ui.view'>
+        <field name ='name'>list.actor.award.list</field>
+        <field name ='model'>list.actor.award</field>
+        <field name ='arch' type ='xml'>
+            <list string ='Awards'>
+                <field name ='name' />
+                <field name ='year' />
+            </list>
+        </field>
+    </record>
+    <record id='award_action' model='ir.actions.act_window'> 
+        <field name='name'> Awards </field>
+        <field name='res_model'>list.actor.award</field>
+        <field name='view_mode'>list,form</field>
+    </record>
+</odoo>

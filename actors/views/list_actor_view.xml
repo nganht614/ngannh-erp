@@ -1,0 +1,63 @@
+<odoo>
+    <record id ='list_actor_movie_form' model= 'ir.ui.view'>
+        <field name='name'>list.actor.form</field>
+        <field name='model'>list.actor</field>
+        <field name='arch' type='xml'> 
+            <form string ='Actors'>
+                <sheet>
+                    <group>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <field name ='name' />
+                    </group>
+                    <notebook>
+                        <page string='Thông tin'>
+                            <group>
+                                <field name ='gender' />
+                                </field name ='date_of_birth'/>
+                                <field name ='age' />
+                                <field name ='country'/>
+                                <field name ='phone'/>
+                            </group>
+                        </page>
+                        <page string ='Tiểu sử'>
+                            <group>
+                                <field name = 'biography'/>
+                                <field name = 'award_ids'/>
+                            </group>
+                        </page>
+                        <page string = 'Danh sách phim'>
+                            <group>
+                                <field name ='movie_ids'>
+                                    <list>
+                                        <field name ='name' />
+                                        <field name ='release_date' />
+                                        <field name ='description' />
+                                        <field name ='actor_ids' />
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id='list_actor_list' model='ir.ui.view'>
+        <field name ='name'>list.actor.list</field>
+        <field name ='model'>list.actor</field>
+        <field name ='arch' type ='xml'>
+            <list string ='Actors'>
+                <field name ='name' />
+                <field name ='gender' />
+                <field name ='age' />
+                <field name ='country' />
+            </list>
+        </field>
+    </record>
+    <record id='actor_action' model='ir.actions.act_window'> 
+        <field name='name'> Actors </field>
+        <field name='res_model'>list.actor</field>
+        <field name='view_mode'>list,form</field>
+    </record>
+
+</odoo>

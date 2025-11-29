@@ -1,0 +1,36 @@
+<odoo>
+    <record id ='list_movie_view_form' model= 'ir.ui.view'>
+        <field name='name'>list.movie.form</field>
+        <field name='model'>list.movie</field>
+        <field name='arch' type='xml'> 
+            <form string ='Movies'>
+                <sheet>
+                    <group>
+                        <field name ='name' />
+                        <field name ='release_date' />
+                        <field name ='description' />
+                        <field name ='actor_ids' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id='list_movie_list' model='ir.ui.view'>
+        <field name ='name'>list.movie.list</field>
+        <field name ='model'>list.movie</field>
+        <field name ='arch' type ='xml'>
+            <list string ='Movies'>
+                <field name ='name' />
+                <field name ='release_date' />
+                <field name ='description' />
+                <field name ='actor_ids' />
+            </list>
+        </field>
+    </record>
+    <record id='movie_action' model='ir.actions.act_window'> 
+        <field name='name'> Movie </field>
+        <field name='res_model'>list.movie</field>
+        <field name='view_mode'>list,form</field>
+    </record>
+
+</odoo>
