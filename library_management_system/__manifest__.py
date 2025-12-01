@@ -7,8 +7,12 @@
     'category': 'Productivity',
     'depends': ['base'],
     'data': [
-        'library_book_view.xml',
         'security/ir.model.access.csv',
+        'views/library_book_view.xml',
+        'views/library_author_view.xml',
+        'views/library_category_view.xml',
+        'views/library_loan_view.xml',
+        'views/library_readers_view.xml',
     ],
     'installable': True,
     'application': True,

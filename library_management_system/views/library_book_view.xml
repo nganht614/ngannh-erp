@@ -9,6 +9,7 @@
                         <field name ='name' />
                         <field name ='isbn' />
                         <field name ='author_id'/>
+                        <field name ='category_ids'/>
                         <field name ='published_date' />
                         <field name ='pages' />
                          <field name ='active' />
@@ -34,4 +35,7 @@
         <field name='res_model'>library.book</field>
         <field name='view_mode'>list,form</field>
     </record>
+
+    <menuitem id="library_management_menu" name="Library Management" />
+    <menuitem id="library_book_menu" name="Library Book" parent="library_management_menu" action="lib_book"/>
 </odoo>

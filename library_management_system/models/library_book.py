@@ -8,13 +8,16 @@ class LibraryManagement(models.Model):
     isbn = fields.Char(string ='Mã sách')
     active = fields.Boolean(string ='Trạng thái kích hoạt', default=True)
     published_date = fields.Date(string ='Ngày xuất bản')
-    pages = fields.Int(string='Số trang')
+    pages = fields.Integer(string='Số trang')
     description = fields.Html (string='Mô tả nội dung')
     author_id = fields.Many2one(
         'library.author',
         string ='Tên tác giả',
     )
-
+    category_ids = fields.Many2many(
+        'library.category',
+        string = 'Loại sách',
+    )
     _sql_constraints = [
          ('unique_isbn','unique(isbn)', 'Mã sách đã tồn tại')
     ]

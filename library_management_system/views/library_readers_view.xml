@@ -5,10 +5,13 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('o_address_format')]/field[@name='city']" position="replace">
-                <field name="is_town_enabled" invisible="1"/>
-                <field name="town_id" placeholder="Town" invisible='is_town_enabled == False'/>
-                <field name="city_id" placeholder="City" class="o_address_city"    />
+            <xpath expr="//notebook" position="inside">
+                <page string="Library Info">
+                    <group>
+                        <field name="is_library_member"/>
+                        <field name="library_card_code"/>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>

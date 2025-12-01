@@ -1,0 +1,19 @@
+<odoo>
+    <record id ='library_category_list' model= 'ir.ui.view'>
+        <field name='name'>library.category.list</field>
+        <field name='model'>library.category</field>
+        <field name='arch' type='xml'> 
+             <list string ='Library Author'>
+                <field name ='name' />
+            </list>
+        </field>
+    </record>
+
+    <record id='lib_category' model='ir.actions.act_window'> 
+        <field name='name'> Library Category </field>
+        <field name='res_model'>library.category</field>
+        <field name='view_mode'>list</field>
+    </record>
+
+    <menuitem id="library_category_menu" name="Library Category" parent="library_management_menu" action="lib_category"/>
+</odoo>
