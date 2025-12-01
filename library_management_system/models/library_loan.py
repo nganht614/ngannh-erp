@@ -43,7 +43,7 @@ class LibLoan(models.Model):
             else:
                 rec.days_until_due = 0
 
-    def action_confirm(self):
+    def action_confirm_state(self):
         for rec in self:
             if rec.state =='draft':
                 rec.state = 'ongoing'
@@ -69,5 +69,13 @@ class LibLoan(models.Model):
         
         overdue_loans.write({'state': 'overdue'})
 
+class LibLoanWizard(models.TransientModel):
+    _name ='library.loan.wizard'
+    _inherit = 'library.loan'
 
+    def action_confirm(self):
+        self.env['library.loan'].create({
+            'partner_id': self.partner_id.id,
+            'book_ids': [(6, 0,self.book_ids.ids)],
+        })
 

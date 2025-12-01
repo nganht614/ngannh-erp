@@ -3,7 +3,7 @@
         <field name='name'>library.category.list</field>
         <field name='model'>library.category</field>
         <field name='arch' type='xml'> 
-             <list string ='Library Author'>
+             <list string ='Library Author' editable = 'bottom'>
                 <field name ='name' />
             </list>
         </field>

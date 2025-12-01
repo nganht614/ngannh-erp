@@ -4,6 +4,9 @@
         <field name='model'>library.book</field>
         <field name='arch' type='xml'> 
             <form string ='Library Book'>
+                <header>
+                    <button name="action_archive" type="object" string="Archive"/>
+                </header>
                 <sheet>
                     <group>
                         <field name ='name' />
@@ -12,8 +15,9 @@
                         <field name ='category_ids'/>
                         <field name ='published_date' />
                         <field name ='pages' />
-                         <field name ='active' />
+                        <field name ='active' />
                         <field name ='description' />
+                        <field name ='archive_date' />
                     </group>
                 </sheet>
             </form>

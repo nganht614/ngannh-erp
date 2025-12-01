@@ -1,8 +1,18 @@
 from odoo import models,fields,api
 from odoo.exceptions import ValidationError
 
+class LibArchMixin(models.AbstractModel):
+    _name = 'library.archivable.mixi'
+    _abstract = True
+
+    archive_date = fields.Date(string= 'Ngày lưu trữ')
+
+    def action_archive(self):
+        self.write({'archive_date': fields.Date.today()})
+
 class LibraryManagement(models.Model):
     _name ='library.book'
+    _inherit = ['library.archivable.mixi']
 
     name = fields.Char(string ='Tên sách', required=True)
     isbn = fields.Char(string ='Mã sách')
