@@ -37,3 +37,15 @@ class LibraryManagement(models.Model):
         for rec in self:
             if rec.published_date and rec.published_date > fields.Date.today():
                 raise ValidationError ('Ngày xuất bản không được lớn hơn ngày hiện tại')
+    
+    @api.constrains('isbn')
+    def _check_unique_isbn(self):
+        for rec in self:
+            if not rec.isbn:
+                continue
+            domain = [
+                ('isbn', '=', rec.isbn),
+                ('id', '!=', rec.id)
+            ]
+            if self.search_count(domain) > 0:
+                raise ValidationError("Mã đã tồn tại!")

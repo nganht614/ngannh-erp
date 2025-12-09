@@ -71,7 +71,13 @@ class LibLoan(models.Model):
 
 class LibLoanWizard(models.TransientModel):
     _name ='library.loan.wizard'
-    _inherit = 'library.loan'
+
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Độc giả',
+        required=True,
+    )
+    book_ids = fields.Many2many('library.loan', string='Danh sách')
 
     def action_confirm(self):
         self.env['library.loan'].create({

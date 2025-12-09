@@ -1,0 +1,28 @@
+from odoo import models,fields,api
+
+class itreqline(models.Model):
+    _name ='it.request.line'
+
+    request_id = fields.Many2one(
+        'it.request',
+        string= 'Yêu cầu',
+    )
+    equipment_id = fields.Many2one(
+        'it.equipment',
+        string='Thiết bị',
+    )
+    price = fields.Float(string='Giá', readonly=True)
+
+
+    @api.onchange('equipment_id')
+    def _onchange_price(self):
+        self.price = self.equipment_id.price
+
+    @api.contrains('equipment_id')
+    def _check_unique_equip(self):
+        for rec in self:
+            if not rec.equipment_id:
+               
+                
+    
+    
