@@ -1,0 +1,48 @@
+<odoo>
+    <record id ='it_request_form' model= 'ir.ui.view'>
+        <field name='name'>it.request.form</field>
+        <field name='model'>it.request</field>
+        <field name='arch' type='xml'> 
+            <form string ='IT Request'>
+                <header>
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,waiting,approved"
+                            statusbar_status="state"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name ='name' placeholder ='Tên yêu cầu'/>
+                    </h1>
+                    <group>
+                        <field name ='employee_id' />
+                        <field name ='department_id'/>
+                        <field name ='request_date'/>
+                        <field name ='approve_date' />
+                        <field name ='line_ids'/>
+                        <field name ='total_amount' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id='it_request_list' model='ir.ui.view'>
+        <field name ='name'>it.request.list</field>
+        <field name ='model'>it.request</field>
+        <field name ='arch' type ='xml'>
+            <list string ='IT Request'>
+                <field name ='name' />
+                <field name ='department_id' />
+                <field name ='request_date' />
+                <field name ='state' />
+            </list>
+        </field>
+    </record>
+    <record id='it_request' model='ir.actions.act_window'> 
+        <field name='name'> IT Request </field>
+        <field name='res_model'>it.request</field>
+        <field name='view_mode'>list,form</field>
+    </record>
+
+    <menuitem id="it_equipment_request_menu" name="IT Equipment" />
+    <menuitem id="it_request_menu" name="IT Request" parent="it_equipment_request_menu" action="it_request"/>
+</odoo>

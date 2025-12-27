@@ -1,0 +1,13 @@
+<odoo>
+    <record id ='it_request_line_list' model= 'ir.ui.view'>
+        <field name='name'>it.request.line.list</field>
+        <field name='model'>it.request.line</field>
+        <field name='arch' type='xml'> 
+             <list string ='IT Request Line' editable = 'bottom'>
+                <field name ='request_id' />
+                <field name ='equipment_id' />
+                <field name ='price' force_save ='1' />
+            </list>
+        </field>
+    </record>
+</odoo>

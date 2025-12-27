@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="create_lib_loan_wizard_form" model="ir.ui.view">
+        <field name="name">create.lib.loan.wizard.form</field>
+        <field name="model">library.loan.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Quickly">
+                <sheet>
+                    <group>
+                        <field name="partner_id" required="1"/>
+                        <field name="book_ids" required="1" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
+                        <field name="date_due"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm"
+                            string="Confirm"
+                            type="object"
+                            class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

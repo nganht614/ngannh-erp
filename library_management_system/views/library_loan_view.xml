@@ -8,8 +8,8 @@
                         <field name="state" widget="statusbar"
                             statusbar_visible="draft,ongoing,done,overdue"
                             statusbar_status="state"/>
-                        <button name="action_check_overdue" type="object" string="Check overdue" invisible="state in ['draft','done','overdue']"/>
-                        <button name="action_confirm_state" type="object" string="Confirm State" invisible="state in ['draft','done','overdue']"/>
+                        <!-- <button name="action_check_overdue" type="object" string="Check overdue" invisible="state in ['draft','done','overdue']"/> -->
+                        <button name="action_confirm_state" type="object" string="Confirm State" invisible="state in ['done','overdue']"/>
                 </header>
                 <sheet>
                     <group>
@@ -31,6 +31,7 @@
             <list string ='Library Loan'>
                 <field name ='partner_id' />
                 <field name ='book_id' />
+                <field name ='state' />
             </list>
         </field>
     </record>
@@ -50,6 +51,7 @@
             records.action_check_overdue()
         </field>
     </record>
+
 
     <menuitem id="library_loan_menu" name="Library Loan" parent="library_management_menu" action="lib_loan"/>
 </odoo>

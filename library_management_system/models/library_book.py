@@ -5,10 +5,19 @@ class LibArchMixin(models.AbstractModel):
     _name = 'library.archivable.mixi'
     _abstract = True
 
-    archive_date = fields.Date(string= 'Ngày lưu trữ')
+    active = fields.Boolean(string ='Trạng thái kích hoạt', default=True)
+    archive_date = fields.Date(string= 'Ngày lưu trữ', compute ='_compute_archive_date', store =True)
 
     def action_archive(self):
-        self.write({'archive_date': fields.Date.today()})
+        self.write({'active': False})
+    
+    @api.depends('active')
+    def _compute_archive_date(self):
+        for rec in self:
+            if rec.active == False:
+                rec.archive_date = fields.Date.today()
+            else:
+                rec.archive_date = False
 
 class LibraryManagement(models.Model):
     _name ='library.book'
@@ -16,7 +25,6 @@ class LibraryManagement(models.Model):
 
     name = fields.Char(string ='Tên sách', required=True)
     isbn = fields.Char(string ='Mã sách')
-    active = fields.Boolean(string ='Trạng thái kích hoạt', default=True)
     published_date = fields.Date(string ='Ngày xuất bản')
     pages = fields.Integer(string='Số trang')
     description = fields.Html (string='Mô tả nội dung')
@@ -49,3 +57,16 @@ class LibraryManagement(models.Model):
             ]
             if self.search_count(domain) > 0:
                 raise ValidationError("Mã đã tồn tại!")
+            
+    def action_create_loans(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Create Loans',
+            'res_model': 'library.loan.wizard',
+            'view_mode': 'form',
+            'view_id': self.env.ref('library_management_system.create_lib_loan_wizard_form').id,
+            'target': 'new',
+            'context': {
+                'default_book_ids': self.ids,
+            },
+        }

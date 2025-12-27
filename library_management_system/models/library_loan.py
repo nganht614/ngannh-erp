@@ -17,12 +17,13 @@ class LibLoan(models.Model):
         required=True,
     )
     date_start = fields.Date (default=fields.Date.context_today, string='Ngày bắt đầu')
-    date_due = fields.Date(string= 'Hạn trả')
+    date_due = fields.Date(string= 'Hạn trả', required = True)
     days_until_due = fields.Integer(
         string='Ngày đến hạn',
         compute = '_compute_days_until_due_', 
         inverse='_inverse_days_until_due',
         store = False,)
+
     state = fields.Selection(
             [
                 ('draft', 'Draft'),
@@ -63,25 +64,30 @@ class LibLoan(models.Model):
         today = fields.Date.today()
 
         overdue_loans = self.env['library.loan'].search([
+            ('id','in',self.ids),
             ('state','=','ongoing'),
             ('date_due','<',today),
         ])
         
         overdue_loans.write({'state': 'overdue'})
+    
+    @api.constrains('book_id', 'state')
+    def check_book_loan(self):
+        for rec in self:
+            book_loan = rec.env['library.loan'].search([
+                ('book_id', '=', rec.book_id.id),
+                ('state', '=','ongoing'),
+                ('id','!=', self.id)
+            ])
+            if book_loan:
+                raise UserError(f"Sách {rec.book_id.name} (ISBN: {rec.book_id.isbn}) đã được cho mượn")
 
-class LibLoanWizard(models.TransientModel):
-    _name ='library.loan.wizard'
-
-    partner_id = fields.Many2one(
-        'res.partner',
-        string='Độc giả',
-        required=True,
-    )
-    book_ids = fields.Many2many('library.loan', string='Danh sách')
-
-    def action_confirm(self):
-        self.env['library.loan'].create({
-            'partner_id': self.partner_id.id,
-            'book_ids': [(6, 0,self.book_ids.ids)],
-        })
-
+    @api.constrains('date_start')
+    def check_status(self):
+        today = fields.Date.today()
+        for rec in self:
+            if rec.date_start <= today:
+                rec.state = 'ongoing'
+            else:
+                rec.state = 'draft'
+            

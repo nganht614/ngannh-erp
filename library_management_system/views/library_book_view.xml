@@ -12,7 +12,7 @@
                         <field name ='name' />
                         <field name ='isbn' />
                         <field name ='author_id'/>
-                        <field name ='category_ids'/>
+                        <field name ='category_ids' widget="many2many_tags"/>
                         <field name ='published_date' />
                         <field name ='pages' />
                         <field name ='active' />
@@ -38,6 +38,17 @@
         <field name='name'> Library Book </field>
         <field name='res_model'>library.book</field>
         <field name='view_mode'>list,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="action_create_lib_loans">
+        <field name="name"> Create Quickly</field>
+        <field name="model_id" ref="model_library_book"/>
+        <field name="binding_model_id" ref="model_library_book" />
+        <field name="binding_type">action</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_create_loans()
+        </field>
     </record>
 
     <menuitem id="library_management_menu" name="Library Management" />

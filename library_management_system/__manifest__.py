@@ -13,6 +13,7 @@
         'views/library_category_view.xml',
         'views/library_loan_view.xml',
         'views/library_readers_view.xml',
+        'wizard/create_lib_loan_wizard_view.xml',
     ],
     'installable': True,
     'application': True,
